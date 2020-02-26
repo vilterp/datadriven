@@ -26,7 +26,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/cockroachdb/errors"
+	"github.com/pkg/errors"
+	"github.com/stretchr/testify/require"
 )
 
 var (
@@ -321,7 +322,8 @@ func runDirective(t *testing.T, r *testDataReader, f func(*testing.T, *TestData)
 			r.emit(actual)
 		}
 	} else if d.Expected != actual {
-		t.Fatalf("\n%s: %s\nexpected:\n%s\nfound:\n%s", d.Pos, d.Input, d.Expected, actual)
+		//t.Fatalf("\n%s: %s\nexpected:\n%s\nfound:\n%s", d.Pos, d.Input, d.Expected, actual)
+		require.Equal(t, d.Expected, actual)
 	} else if testing.Verbose() {
 		input := d.Input
 		if input == "" {
@@ -397,7 +399,7 @@ func ClearResults(path string) error {
 	}
 
 	if finfo.IsDir() {
-		return errors.Newf("%s is a directory, not a file")
+		return errors.Errorf("%s is a directory, not a file", finfo.Name())
 	}
 
 	runTestInternal(

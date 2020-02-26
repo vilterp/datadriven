@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/cockroachdb/errors"
+	"github.com/pkg/errors"
 )
 
 func TestNewLineBetweenDirectives(t *testing.T) {

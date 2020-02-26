@@ -18,7 +18,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/cockroachdb/errors"
+	"github.com/pkg/errors"
 )
 
 // ParseLine parses a line of datadriven input language and returns
@@ -71,7 +71,7 @@ func splitDirectives(line string) ([]string, error) {
 		str := splitDirectivesRE.FindString(line)
 		if len(str) == 0 {
 			column := len(origLine) - len(line) + 1
-			return nil, errors.Newf("cannot parse directive at column %d: %s", column, origLine)
+			return nil, errors.Errorf("cannot parse directive at column %d: %s", column, origLine)
 		}
 		res = append(res, strings.TrimSpace(line[0:len(str)]))
 		line = line[len(str):]
