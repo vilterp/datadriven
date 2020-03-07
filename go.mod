@@ -1,4 +1,4 @@
-module github.com/cockroachdb/datadriven
+module github.com/vilterp/datadriven
 
 go 1.13
 
