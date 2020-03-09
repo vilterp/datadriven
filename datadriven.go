@@ -323,6 +323,7 @@ func runDirective(t *testing.T, r *testDataReader, f func(*testing.T, *TestData)
 		}
 	} else if d.Expected != actual {
 		//t.Fatalf("\n%s: %s\nexpected:\n%s\nfound:\n%s", d.Pos, d.Input, d.Expected, actual)
+		fmt.Printf("\n%s:\n%s [%d args]\n%s\n----\n", d.Pos, d.Cmd, len(d.CmdArgs), d.Input)
 		require.Equal(t, d.Expected, actual)
 	} else if testing.Verbose() {
 		input := d.Input
